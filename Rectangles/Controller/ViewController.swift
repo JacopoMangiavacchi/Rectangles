@@ -37,10 +37,18 @@ class ViewController: UIViewController {
     
     //add a rectView to the view.subView collection and to the rectViewArray
     func addRectView(frame: CGRect, color: UIColor) {
-        let rectView = UIView(frame: frame)
+        //create and add rect view to the view.subView collection and to the rectViewArray
+        let rectView = UIView(frame: CGRect(origin: frame.origin, size: CGSize(width: 0, height: 0)))
         rectView.backgroundColor = color
+        rectView.alpha = 0
         self.view.addSubview(rectView)
         self.rectViewArray.append(rectView)
+        
+        //animate first apparence of the new rectView with minimal dimension
+        UIView.animate(withDuration: 1, animations: {
+            rectView.alpha = 1
+            rectView.frame = frame
+        })
         
         //add UIPinchGestureRecognizer for resizing rectView
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchHandler))
