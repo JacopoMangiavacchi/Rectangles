@@ -8,22 +8,14 @@
 
 import UIKit
 
-let maxRectView = 2
+let maxRectView = 3
 let minRectSize:CGFloat = 100
 
 class ViewController: UIViewController {
     var rectViewArray = [UIView]()
+    var intersectionViewArray = [UIView]()
     var gestureArray = [UIGestureRecognizer]()
     var firstTouchPoint: CGPoint?
-    
-    lazy var intersectionView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        view.backgroundColor = .orange
-        view.isHidden = true
-        self.view.addSubview(view)
-        view.isUserInteractionEnabled = false
-        return view
-    }()
     
     let colors:[UIColor] = [.yellow, .red]
     
@@ -67,6 +59,25 @@ class ViewController: UIViewController {
         gestureArray.append(panGesture)
     }
     
+    //add an intersectionView
+    func addIntersectionView(rectangle: Rectangle) {
+        let intersectionView = UIView()
+        intersectionView.rectangle = rectangle
+        intersectionView.backgroundColor = .orange
+        self.view.addSubview(intersectionView)
+        intersectionView.isUserInteractionEnabled = false
+        self.intersectionViewArray.append(intersectionView)
+    }
+
+    //remove all intersectionView in the rectViewArray from the view.subView collection and from array itself
+    func removeAllIntersectionViews() {
+        for intersectionView in intersectionViewArray {
+            intersectionView.removeFromSuperview()
+        }
+        
+        intersectionViewArray.removeAll()
+    }
+    
     //remove all rectView in the rectViewArray from the view.subView collection and from array itself
     func removeAllRectViews() {
         for rectView in rectViewArray {
@@ -76,6 +87,8 @@ class ViewController: UIViewController {
         rectViewArray.removeAll()
         
         gestureArray.removeAll()
+        
+        removeAllIntersectionViews()
     }
     
     //enable all gesture recognizers for rectViews
@@ -96,7 +109,6 @@ class ViewController: UIViewController {
     //Shake to reset!
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
         removeAllRectViews()
-        intersectionView.isHidden = true
     }
     
     //set minimum size for rectView
@@ -111,13 +123,10 @@ class ViewController: UIViewController {
     func checkIntersection() {
         let intersections = rectViewArray.map{$0.rectangle}.intersections
         
-        if intersections.isEmpty {
-            intersectionView.isHidden = true
-        }
-        else {
-            intersectionView.rectangle = intersections.first!
-            intersectionView.isHidden = false
-            self.view.bringSubview(toFront: intersectionView)
+        removeAllIntersectionViews()
+        
+        for intersection in intersections {
+            addIntersectionView(rectangle: intersection)
         }
     }
 }
