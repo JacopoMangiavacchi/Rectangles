@@ -9,11 +9,11 @@
 import UIKit
 
 let maxRectView = 2
+let minRectSize:CGFloat = 100
 
 class ViewController: UIViewController {
     var rectViewArray = [UIView]()
     var gestureArray = [UIGestureRecognizer]()
-    var addingRect = false
     var firstTouchPoint: CGPoint?
     
     lazy var intersectionView: UIView = {
@@ -95,8 +95,8 @@ class ViewController: UIViewController {
     func setMinimumSize(view: UIView) {
         view.frame = CGRect(x: view.frame.origin.x,
                             y: view.frame.origin.y,
-                            width: max(100, view.frame.width),
-                            height: max(100, view.frame.height))
+                            width: max(minRectSize, view.frame.width),
+                            height: max(minRectSize, view.frame.height))
     }
     
     //check if there is an intersection between rectViews in rectViewArray
@@ -114,46 +114,6 @@ class ViewController: UIViewController {
     }
 }
 
-
-//Touches Events to Draw new Rectangles (up to maxRectView)
-extension ViewController {
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if rectViewArray.count < maxRectView, let touch = touches.first {
-            addingRect = true
-            firstTouchPoint = touch.location(in: self.view)
-        }
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let firstTouchPoint = firstTouchPoint, let touch = touches.first {
-            let currentPoint = touch.location(in: view)
-            let frame = CGRect(x: min(firstTouchPoint.x, currentPoint.x),
-                               y: min(firstTouchPoint.y, currentPoint.y),
-                               width: abs(firstTouchPoint.x - currentPoint.x),
-                               height: abs(firstTouchPoint.y - currentPoint.y))
-            if frame.width > 0 && frame.height > 0 {
-                if addingRect {
-                    addingRect = false
-                    addRectView(frame: frame, color: color(rectViewArray.count))
-                }
-                
-                if let last = rectViewArray.last {
-                    last.frame = frame
-                    setMinimumSize(view: last)
-                    checkIntersection()
-                }
-            }
-        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        firstTouchPoint = nil
-        addingRect = false
-        if rectViewArray.count == maxRectView {
-            enableAllGestureRecognizers()
-        }
-    }
-}
 
 //Gesture recognizers to move and resize rectViews
 extension ViewController: UIGestureRecognizerDelegate {
@@ -197,3 +157,38 @@ extension ViewController: UIGestureRecognizerDelegate {
         return false
     }
 }
+
+
+//Touches Events to Draw new Rectangles (up to maxRectView)
+extension ViewController {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if rectViewArray.count < maxRectView, let touch = touches.first {
+            firstTouchPoint = touch.location(in: self.view)
+            addRectView(frame: CGRect(origin: firstTouchPoint!, size: CGSize(width: minRectSize, height: minRectSize)), color: color(rectViewArray.count))
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let firstTouchPoint = firstTouchPoint, let touch = touches.first {
+            let currentPoint = touch.location(in: view)
+            let frame = CGRect(x: min(firstTouchPoint.x, currentPoint.x),
+                               y: min(firstTouchPoint.y, currentPoint.y),
+                               width: abs(firstTouchPoint.x - currentPoint.x),
+                               height: abs(firstTouchPoint.y - currentPoint.y))
+            if frame.width > 0 && frame.height > 0, let last = rectViewArray.last {
+                last.frame = frame
+                setMinimumSize(view: last)
+                checkIntersection()
+            }
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        firstTouchPoint = nil
+        if rectViewArray.count == maxRectView {
+            enableAllGestureRecognizers()
+        }
+    }
+}
+
+
