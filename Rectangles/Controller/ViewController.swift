@@ -48,7 +48,7 @@ class ViewController: UIViewController {
     
     //create and add rect view to the rectsView.subView collection and to the engine
     func addRectView(rectangle: Rectangle) {
-        let rectView = UIView()
+        let rectView = UIRectangleView()
         rectView.rectangle = Rectangle(leftX: rectangle.leftX, topY: rectangle.topY, width: 0, height: 0)
         rectView.tag = engine.rectangleCount
         rectView.backgroundColor = color(engine.rectangleCount)

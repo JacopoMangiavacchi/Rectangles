@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIView : RectangleView {
+extension UIView : RectangleViewProtocol {
     var rectangle: Rectangle {
         get {
             return Rectangle(leftX: Float(self.frame.origin.x),

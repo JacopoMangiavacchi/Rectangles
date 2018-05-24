@@ -77,7 +77,7 @@ extension Array where Element == Rectangle {
 }
 
 
-protocol RectangleView {
+protocol RectangleViewProtocol {
     var rectangle: Rectangle {get set}
 }
 
