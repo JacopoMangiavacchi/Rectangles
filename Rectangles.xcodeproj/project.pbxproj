@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E311AD620B7748000967090 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E311AD520B7748000967090 /* Engine.swift */; };
 		7EBC52D320B7534B00FB4360 /* RectangleIntentsDefinition.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EBC52D220B7534B00FB4360 /* RectangleIntentsDefinition.json */; };
 		7EBC52D520B75CC700FB4360 /* UIRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBC52D420B75CC700FB4360 /* UIRectangleView.swift */; };
-		7ECFEF2120B65EC500E24675 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECFEF2020B65EC500E24675 /* Engine.swift */; };
+		7ECFEF2120B65EC500E24675 /* RectangleEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECFEF2020B65EC500E24675 /* RectangleEngine.swift */; };
 		7EDE7A0120B5571700E4C6D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDE7A0020B5571700E4C6D7 /* AppDelegate.swift */; };
 		7EDE7A0320B5571700E4C6D7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDE7A0220B5571700E4C6D7 /* ViewController.swift */; };
 		7EDE7A0620B5571700E4C6D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EDE7A0420B5571700E4C6D7 /* Main.storyboard */; };
@@ -31,9 +32,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E311AD520B7748000967090 /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		7EBC52D220B7534B00FB4360 /* RectangleIntentsDefinition.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RectangleIntentsDefinition.json; sourceTree = "<group>"; };
 		7EBC52D420B75CC700FB4360 /* UIRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRectangleView.swift; sourceTree = "<group>"; };
-		7ECFEF2020B65EC500E24675 /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		7ECFEF2020B65EC500E24675 /* RectangleEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleEngine.swift; sourceTree = "<group>"; };
 		7EDE79FD20B5571700E4C6D7 /* Rectangles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rectangles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EDE7A0020B5571700E4C6D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EDE7A0220B5571700E4C6D7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +68,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7E3CC8BD20B77657001C6197 /* IntentEngine */ = {
+			isa = PBXGroup;
+			children = (
+				7E311AD520B7748000967090 /* Engine.swift */,
+			);
+			path = IntentEngine;
+			sourceTree = "<group>";
+		};
 		7EBC52D120B7530700FB4360 /* Intent */ = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +105,7 @@
 		7EDE79FF20B5571700E4C6D7 /* Rectangles */ = {
 			isa = PBXGroup;
 			children = (
+				7E3CC8BD20B77657001C6197 /* IntentEngine */,
 				7EBC52D120B7530700FB4360 /* Intent */,
 				7EDE7A2120B5573900E4C6D7 /* Model */,
 				7EDE7A2020B5573200E4C6D7 /* View */,
@@ -130,7 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				7EDE7A2320B557EF00E4C6D7 /* Rectangle.swift */,
-				7ECFEF2020B65EC500E24675 /* Engine.swift */,
+				7ECFEF2020B65EC500E24675 /* RectangleEngine.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -250,7 +261,8 @@
 				7EBC52D520B75CC700FB4360 /* UIRectangleView.swift in Sources */,
 				7EDE7A0120B5571700E4C6D7 /* AppDelegate.swift in Sources */,
 				7EDE7A2620B5582A00E4C6D7 /* UIView-RectangleViewProtocol.swift in Sources */,
-				7ECFEF2120B65EC500E24675 /* Engine.swift in Sources */,
+				7ECFEF2120B65EC500E24675 /* RectangleEngine.swift in Sources */,
+				7E311AD620B7748000967090 /* Engine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@ import UIKit
 let minRectSize:CGFloat = 100
 
 class ViewController: UIViewController {
-    var engine = Engine()
+    var engine = RectangleEngine()
     var forceFullRefresh = false
 
     var gestureArray = [UIGestureRecognizer]()
@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         let view = UIView(frame: backGroundView.bounds)
         view.backgroundColor = .clear
         backGroundView.addSubview(view)
+        backGroundView.bringSubview(toFront: intersectionsView)
         return view
     }()
     
@@ -151,9 +152,10 @@ class ViewController: UIViewController {
     
     @IBAction func siriAction(_ sender: Any) {
         //TODO: NLU Intents/Query understanding from Engine Intents and Queries
-        //Forced recognition of Engine.reset() Intent
+        //Forced recognition of RectangleEngine "reset" Intent with no parameters
         forceFullRefresh = true
-        engine.reset()
+        engine.fullFill(intent: "reset", parameters: nil)
+        //engine.fullFill(intent: "addRectangle", parameters: ["left" : 50, "top" : 100, "type" : "small"])
     }
     
     //Shake to reset!

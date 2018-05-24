@@ -53,7 +53,7 @@ class RectanglesTests: XCTestCase {
     
     
     func testEngine() {
-        var engine = Engine()
+        var engine = RectangleEngine()
         
         engine.addRectangle(Rectangle(leftX: 1, topY: 1, width: 3, height: 2))
         engine.addRectangle(Rectangle(leftX: 3, topY: 2, width: 1, height: 1))

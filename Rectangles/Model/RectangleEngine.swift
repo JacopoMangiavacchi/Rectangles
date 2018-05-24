@@ -1,5 +1,5 @@
 //
-//  Engine.swift
+//  RectangleEngine.swift
 //  Rectangles
 //
 //  Created by Jacopo Mangiavacchi on 5/23/18.
@@ -9,15 +9,25 @@
 import Foundation
 
 //Engine Data
-struct Engine {
+struct RectangleEngine : Engine {
     private var rectangleArray = [Rectangle]()
     private var intersectionArray: [Rectangle]?
     
     var delegate: EngineEvents?
+
+    mutating func fullFill(intent: String, parameters: [String : Any]?) {
+        switch intent {
+        case "reset":
+            reset()
+        //fullfill(intent: "addRectangle", parameters: ["left" : 50, "top" : 100, "type" : "small"])
+        default:
+            break
+        }
+    }
 }
 
 //Engine Queries
-extension Engine {
+extension RectangleEngine {
     var rectangleCount: Int {
         get {
             return rectangleArray.count
@@ -38,7 +48,7 @@ extension Engine {
 }
     
 //Engine Intents
-extension Engine {
+extension RectangleEngine {
     mutating func reset() {
         rectangleArray.removeAll()
         intersectionArray = nil
@@ -59,7 +69,7 @@ extension Engine {
 }
 
 //Engine Private Methods
-extension Engine {
+extension RectangleEngine {
     private mutating func _checkIntersections() {
         intersectionArray = rectangleArray.intersections
     }
@@ -71,10 +81,13 @@ protocol EngineEvents {
 }
 
 //Engine Events Async Fires
-extension Engine {
+extension RectangleEngine {
     private func _fireAsyncRefreshRender() {
         DispatchQueue.main.async { [self] in
             self.delegate?.refreshRender()
         }
     }
 }
+
+
+
