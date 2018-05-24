@@ -11,6 +11,8 @@ import UIKit
 let minRectSize:CGFloat = 100
 
 class ViewController: UIViewController {
+    var engine = Engine()
+    
     var rectViewArray = [UIView]()
     var intersectionViewArray = [UIView]()
     var gestureArray = [UIGestureRecognizer]()
@@ -107,6 +109,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        engine.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -153,6 +156,12 @@ class ViewController: UIViewController {
     }
 }
 
+// implement refresh view event from the Engine
+extension ViewController : EngineEvents {
+    func refreshRender() {
+        
+    }
+}
 
 //Gesture recognizers to move and resize rectViews
 extension ViewController: UIGestureRecognizerDelegate {
@@ -230,5 +239,4 @@ extension ViewController {
         }
     }
 }
-
 
