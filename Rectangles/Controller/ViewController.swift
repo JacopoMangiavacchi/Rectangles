@@ -21,6 +21,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var backGroundView: UIView!
     @IBOutlet weak var addRectButton: UIBarButtonItem!
     
+    lazy var rectsView: UIView = {
+        let view = UIView(frame: backGroundView.bounds)
+        view.backgroundColor = .clear
+        backGroundView.addSubview(view)
+        return view
+    }()
+    
+    lazy var intersectionsView: UIView = {
+        let view = UIView(frame: backGroundView.bounds)
+        view.backgroundColor = .clear
+        view.isUserInteractionEnabled = false
+        backGroundView.addSubview(view)
+        return view
+    }()
+
+    
     let colors:[UIColor] = [.yellow, .red]
     
     //random color func needed for supporting more than 2 rectViews
@@ -31,13 +47,13 @@ class ViewController: UIViewController {
                                                       alpha: 1.0)
     }
     
-    //add a rectView to the backGroundView.subView collection and to the rectViewArray
+    //add a rectView to the rectsView.subView collection and to the rectViewArray
     func addRectView(frame: CGRect, color: UIColor) {
         //create and add rect view to the view.subView collection and to the rectViewArray
         let rectView = UIView(frame: CGRect(origin: frame.origin, size: CGSize(width: 0, height: 0)))
         rectView.backgroundColor = color
         rectView.alpha = 0
-        self.backGroundView.addSubview(rectView)
+        self.rectsView.addSubview(rectView)
         self.rectViewArray.append(rectView)
         
         //animate first apparence of the new rectView with minimal dimension
@@ -68,7 +84,7 @@ class ViewController: UIViewController {
         let intersectionView = UIView()
         intersectionView.rectangle = rectangle
         intersectionView.backgroundColor = .orange
-        self.backGroundView.addSubview(intersectionView)
+        self.intersectionsView.addSubview(intersectionView)
         intersectionView.isUserInteractionEnabled = false
         self.intersectionViewArray.append(intersectionView)
     }
