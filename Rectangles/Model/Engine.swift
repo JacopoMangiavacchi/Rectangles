@@ -10,11 +10,27 @@ import Foundation
 
 //Engine Data
 struct Engine {
-    var rectangleArray = [Rectangle]()
-    var intersectionArray: [Rectangle]?
+    private var rectangleArray = [Rectangle]()
+    private var intersectionArray: [Rectangle]?
+    
     var delegate: EngineEvents?
 }
 
+//Engine Queries
+extension Engine {
+    var rectangleCount: Int {
+        get {
+            return rectangleArray.count
+        }
+    }
+    
+    var allIntersections: [Rectangle] {
+        get {
+            return intersectionArray ?? [Rectangle]()
+        }
+    }
+}
+    
 //Engine Intents
 extension Engine {
     mutating func reset() {
@@ -29,7 +45,7 @@ extension Engine {
         _fireRefreshRender()
     }
 
-    mutating func moveRectangle(pos: Int, to: Rectangle) {
+    mutating func resizeRectangle(pos: Int, to: Rectangle) {
         rectangleArray[pos] = to
         _checkIntersections()
         _fireRefreshRender()
