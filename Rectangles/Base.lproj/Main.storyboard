@@ -31,6 +31,12 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="V0I-Zl-b90"/>
+                                    <barButtonItem title="Hey Siri" id="dAk-Eb-u3a">
+                                        <connections>
+                                            <action selector="siriAction:" destination="BYZ-38-t0r" id="yAw-zz-9sH"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="bGb-ul-bgX"/>
                                     <barButtonItem systemItem="refresh" id="qTd-c3-rtm">
                                         <connections>
                                             <action selector="restart:" destination="BYZ-38-t0r" id="VxL-l4-iB6"/>

@@ -12,7 +12,8 @@ let minRectSize:CGFloat = 100
 
 class ViewController: UIViewController {
     var engine = Engine()
-    
+    var forceFullRefresh = false
+
     var gestureArray = [UIGestureRecognizer]()
     var firstTouchPoint: CGPoint?
     
@@ -46,10 +47,11 @@ class ViewController: UIViewController {
     }
     
     //create and add rect view to the rectsView.subView collection and to the engine
-    func addRectView(frame: CGRect, color: UIColor) {
-        let rectView = UIView(frame: CGRect(origin: frame.origin, size: CGSize(width: 0, height: 0)))
+    func addRectView(rectangle: Rectangle) {
+        let rectView = UIView()
+        rectView.rectangle = Rectangle(leftX: rectangle.leftX, topY: rectangle.topY, width: 0, height: 0)
         rectView.tag = engine.rectangleCount
-        rectView.backgroundColor = color
+        rectView.backgroundColor = color(engine.rectangleCount)
         rectView.alpha = 0
         self.rectsView.addSubview(rectView)
         self.engine.addRectangle(rectView.rectangle)
@@ -57,7 +59,7 @@ class ViewController: UIViewController {
         //animate first apparence of the new rectView with minimal dimension
         UIView.animate(withDuration: 0.5, animations: {
             rectView.alpha = 1
-            rectView.frame = frame
+            rectView.rectangle = rectangle
         })
         
         //add UIPinchGestureRecognizer for resizing rectView
@@ -147,6 +149,13 @@ class ViewController: UIViewController {
         _reset()
     }
     
+    @IBAction func siriAction(_ sender: Any) {
+        //TODO: NLU Intents/Query understanding from Engine Intents and Queries
+        //Forced recognition of Engine.reset() Intent
+        forceFullRefresh = true
+        engine.reset()
+    }
+    
     //Shake to reset!
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
         _reset()       
@@ -158,6 +167,15 @@ extension ViewController : EngineEvents {
     func refreshRender() {
         removeAllIntersectionViews()
 
+        if forceFullRefresh {
+            forceFullRefresh = false
+            
+            removeAllRectViews()
+            for rectangle in engine.allRectangles {
+                addRectView(rectangle: rectangle)
+            }
+        }
+        
         for intersection in engine.allIntersections {
             addIntersectionView(rectangle: intersection)
         }
@@ -213,7 +231,10 @@ extension ViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !addRectButton.isEnabled, let touch = touches.first {
             firstTouchPoint = touch.location(in: self.view)
-            addRectView(frame: CGRect(origin: firstTouchPoint!, size: CGSize(width: minRectSize, height: minRectSize)), color: color(rectsView.subviews.count))
+            addRectView(rectangle: Rectangle(leftX: Float(firstTouchPoint!.x),
+                                             topY: Float(firstTouchPoint!.y),
+                                             width: Float(minRectSize),
+                                             height: Float(minRectSize)))
         }
     }
     

@@ -29,6 +29,12 @@ extension Engine {
             return intersectionArray ?? [Rectangle]()
         }
     }
+
+    var allRectangles: [Rectangle] {
+        get {
+            return rectangleArray
+        }
+    }
 }
     
 //Engine Intents
