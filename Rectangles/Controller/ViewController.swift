@@ -8,8 +8,6 @@
 
 import UIKit
 
-let minRectSize:CGFloat = 100
-
 class ViewController: UIViewController {
     var engine = RectangleEngine()
     var forceFullRefresh = false
@@ -130,8 +128,8 @@ class ViewController: UIViewController {
     func setMinimumSize(view: UIView) {
         view.frame = CGRect(x: view.frame.origin.x,
                             y: view.frame.origin.y,
-                            width: max(minRectSize, view.frame.width),
-                            height: max(minRectSize, view.frame.height))
+                            width: max(CGFloat(engine.smallRectSize), view.frame.width),
+                            height: max(CGFloat(engine.smallRectSize), view.frame.height))
     }
     
     @IBAction func addRect(_ sender: Any) {
@@ -240,8 +238,8 @@ extension ViewController {
             firstTouchPoint = touch.location(in: self.view)
             addRectView(rectangle: Rectangle(leftX: Float(firstTouchPoint!.x),
                                              topY: Float(firstTouchPoint!.y),
-                                             width: Float(minRectSize),
-                                             height: Float(minRectSize)))
+                                             width: Float(CGFloat(engine.smallRectSize)),
+                                             height: Float(CGFloat(engine.smallRectSize))))
         }
     }
     
