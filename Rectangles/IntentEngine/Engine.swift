@@ -9,5 +9,5 @@
 import Foundation
 
 protocol Engine {
-    mutating func fullFill(intent: String, parameters: [String : Any]?)
+    mutating func fullFill(intent: String, parameters: [String : Any]?, completition: ((_ sayText: String, _ displayText: String, _ forceClose: Bool) -> Void)?)
 }

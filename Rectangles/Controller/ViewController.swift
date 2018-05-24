@@ -154,7 +154,12 @@ class ViewController: UIViewController {
         //TODO: NLU Intents/Query understanding from Engine Intents and Queries
         //Forced recognition of RectangleEngine "reset" Intent with no parameters
         forceFullRefresh = true
-        engine.fullFill(intent: "reset", parameters: nil)
+        engine.fullFill(intent: "reset", parameters: nil) {(sayText, displayText, forceClose) in
+            print(sayText)
+            if forceClose {
+                print("close Siri")
+            }
+        }
         //engine.fullFill(intent: "addRectangle", parameters: ["left" : 50, "top" : 100, "type" : "small"])
     }
     

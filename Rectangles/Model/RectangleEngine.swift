@@ -15,10 +15,11 @@ struct RectangleEngine : Engine {
     
     var delegate: EngineEvents?
 
-    mutating func fullFill(intent: String, parameters: [String : Any]?) {
+    mutating func fullFill(intent: String, parameters: [String : Any]?, completition: ((_ sayText: String, _ displayText: String, _ forceClose: Bool) -> Void)?) {
         switch intent {
         case "reset":
             reset()
+            completition?("Ok", "Ok", true)
         //fullfill(intent: "addRectangle", parameters: ["left" : 50, "top" : 100, "type" : "small"])
         default:
             break
