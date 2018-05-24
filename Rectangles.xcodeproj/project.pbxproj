@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7ECFEF2120B65EC500E24675 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECFEF2020B65EC500E24675 /* Engine.swift */; };
 		7EDE7A0120B5571700E4C6D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDE7A0020B5571700E4C6D7 /* AppDelegate.swift */; };
 		7EDE7A0320B5571700E4C6D7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDE7A0220B5571700E4C6D7 /* ViewController.swift */; };
 		7EDE7A0620B5571700E4C6D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EDE7A0420B5571700E4C6D7 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7ECFEF2020B65EC500E24675 /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		7EDE79FD20B5571700E4C6D7 /* Rectangles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rectangles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EDE7A0020B5571700E4C6D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EDE7A0220B5571700E4C6D7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				7EDE7A2320B557EF00E4C6D7 /* Rectangle.swift */,
+				7ECFEF2020B65EC500E24675 /* Engine.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				7EDE7A0320B5571700E4C6D7 /* ViewController.swift in Sources */,
 				7EDE7A0120B5571700E4C6D7 /* AppDelegate.swift in Sources */,
 				7EDE7A2620B5582A00E4C6D7 /* UIView-RectangleView.swift in Sources */,
+				7ECFEF2120B65EC500E24675 /* Engine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

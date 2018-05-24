@@ -11,13 +11,29 @@ import UIKit
 let minRectSize:CGFloat = 100
 
 class ViewController: UIViewController {
-    var rectViewArray = [UIView]()
-    var intersectionViewArray = [UIView]()
+    var engine = Engine()
+    
     var gestureArray = [UIGestureRecognizer]()
     var firstTouchPoint: CGPoint?
     
     @IBOutlet weak var backGroundView: UIView!
     @IBOutlet weak var addRectButton: UIBarButtonItem!
+    
+    lazy var rectsView: UIView = {
+        let view = UIView(frame: backGroundView.bounds)
+        view.backgroundColor = .clear
+        backGroundView.addSubview(view)
+        return view
+    }()
+    
+    lazy var intersectionsView: UIView = {
+        let view = UIView(frame: backGroundView.bounds)
+        view.backgroundColor = .clear
+        view.isUserInteractionEnabled = false
+        backGroundView.addSubview(view)
+        return view
+    }()
+
     
     let colors:[UIColor] = [.yellow, .red]
     
@@ -29,14 +45,14 @@ class ViewController: UIViewController {
                                                       alpha: 1.0)
     }
     
-    //add a rectView to the backGroundView.subView collection and to the rectViewArray
+    //create and add rect view to the rectsView.subView collection and to the engine
     func addRectView(frame: CGRect, color: UIColor) {
-        //create and add rect view to the view.subView collection and to the rectViewArray
         let rectView = UIView(frame: CGRect(origin: frame.origin, size: CGSize(width: 0, height: 0)))
+        rectView.tag = engine.rectangleCount
         rectView.backgroundColor = color
         rectView.alpha = 0
-        self.backGroundView.addSubview(rectView)
-        self.rectViewArray.append(rectView)
+        self.rectsView.addSubview(rectView)
+        self.engine.addRectangle(rectView.rectangle)
         
         //animate first apparence of the new rectView with minimal dimension
         UIView.animate(withDuration: 0.5, animations: {
@@ -66,28 +82,21 @@ class ViewController: UIViewController {
         let intersectionView = UIView()
         intersectionView.rectangle = rectangle
         intersectionView.backgroundColor = .orange
-        self.backGroundView.addSubview(intersectionView)
-        intersectionView.isUserInteractionEnabled = false
-        self.intersectionViewArray.append(intersectionView)
+        self.intersectionsView.addSubview(intersectionView)
     }
 
-    //remove all intersectionView in the rectViewArray from the view.subView collection and from array itself
+    //remove all intersectionView in the intersectionsView.subviews
     func removeAllIntersectionViews() {
-        for intersectionView in intersectionViewArray {
+        for intersectionView in intersectionsView.subviews {
             intersectionView.removeFromSuperview()
         }
-        
-        intersectionViewArray.removeAll()
     }
     
-    //remove all rectView in the rectViewArray from the view.subView collection and from array itself
+    //remove all rectView in the rectsView.subview
     func removeAllRectViews() {
-        for rectView in rectViewArray {
+        for rectView in rectsView.subviews {
             rectView.removeFromSuperview()
         }
-        
-        rectViewArray.removeAll()
-        
         gestureArray.removeAll()
     }
     
@@ -107,6 +116,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        engine.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -121,23 +131,13 @@ class ViewController: UIViewController {
                             height: max(minRectSize, view.frame.height))
     }
     
-    //check if there is an intersection between rectViews in rectViewArray
-    func checkIntersection() {
-        let intersections = rectViewArray.map{$0.rectangle}.intersections
-        
-        removeAllIntersectionViews()
-        
-        for intersection in intersections {
-            addIntersectionView(rectangle: intersection)
-        }
-    }
-    
     @IBAction func addRect(_ sender: Any) {
         addRectButton.isEnabled = false
         disableAllGestureRecognizers()
     }
     
     func _reset() {
+        engine.reset()
         removeAllRectViews()
         removeAllIntersectionViews()
         addRectButton.isEnabled = true
@@ -153,6 +153,16 @@ class ViewController: UIViewController {
     }
 }
 
+// implement refresh view event from the Engine
+extension ViewController : EngineEvents {
+    func refreshRender() {
+        removeAllIntersectionViews()
+
+        for intersection in engine.allIntersections {
+            addIntersectionView(rectangle: intersection)
+        }
+    }
+}
 
 //Gesture recognizers to move and resize rectViews
 extension ViewController: UIGestureRecognizerDelegate {
@@ -178,7 +188,7 @@ extension ViewController: UIGestureRecognizerDelegate {
                 gestureView.transform = gestureView.transform.scaledBy(x: scaleX, y: scaleY)
                 gestureRecognizer.scale = 1
                 setMinimumSize(view: gestureView)
-                checkIntersection()
+                engine.resizeRectangle(pos: gestureView.tag, to: gestureView.rectangle)
             }
         }
     }
@@ -188,7 +198,7 @@ extension ViewController: UIGestureRecognizerDelegate {
             let translation = gestureRecognizer.translation(in: self.view.superview)
             gestureView.center = CGPoint(x: gestureView.center.x + translation.x, y: gestureView.center.y + translation.y)
             gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
-            checkIntersection()
+            engine.resizeRectangle(pos: gestureView.tag, to: gestureView.rectangle)
         }
     }
     
@@ -203,7 +213,7 @@ extension ViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !addRectButton.isEnabled, let touch = touches.first {
             firstTouchPoint = touch.location(in: self.view)
-            addRectView(frame: CGRect(origin: firstTouchPoint!, size: CGSize(width: minRectSize, height: minRectSize)), color: color(rectViewArray.count))
+            addRectView(frame: CGRect(origin: firstTouchPoint!, size: CGSize(width: minRectSize, height: minRectSize)), color: color(rectsView.subviews.count))
         }
     }
     
@@ -214,10 +224,10 @@ extension ViewController {
                                y: min(firstTouchPoint.y, currentPoint.y),
                                width: abs(firstTouchPoint.x - currentPoint.x),
                                height: abs(firstTouchPoint.y - currentPoint.y))
-            if frame.width > 0 && frame.height > 0, let last = rectViewArray.last {
+            if frame.width > 0 && frame.height > 0, let last = rectsView.subviews.last {
                 last.frame = frame
                 setMinimumSize(view: last)
-                checkIntersection()
+                engine.resizeRectangle(pos: last.tag, to: last.rectangle)
             }
         }
     }
@@ -230,5 +240,4 @@ extension ViewController {
         }
     }
 }
-
 
