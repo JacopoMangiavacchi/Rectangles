@@ -36,25 +36,25 @@ extension Engine {
     mutating func reset() {
         rectangleArray.removeAll()
         intersectionArray = nil
-        _fireRefreshRender()
+        _fireAsyncRefreshRender()
     }
     
     mutating func addRectangle(_ rect: Rectangle) {
         rectangleArray.append(rect)
         _checkIntersections()
-        _fireRefreshRender()
+        _fireAsyncRefreshRender()
     }
 
     mutating func resizeRectangle(pos: Int, to: Rectangle) {
         rectangleArray[pos] = to
         _checkIntersections()
-        _fireRefreshRender()
+        _fireAsyncRefreshRender()
     }
 }
 
 //Engine Private Methods
 extension Engine {
-    mutating func _checkIntersections() {
+    private mutating func _checkIntersections() {
         intersectionArray = rectangleArray.intersections
     }
 }
@@ -66,7 +66,7 @@ protocol EngineEvents {
 
 //Engine Events Async Fires
 extension Engine {
-    func _fireRefreshRender() {
+    private func _fireAsyncRefreshRender() {
         DispatchQueue.main.async { [self] in
             self.delegate?.refreshRender()
         }

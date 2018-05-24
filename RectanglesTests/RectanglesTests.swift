@@ -21,9 +21,7 @@ class RectanglesTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testRectangle() {
         let a = Rectangle(leftX: 1, topY: 1, width: 3, height: 2)
         
         XCTAssertEqual(Rectangle(rect1: a, rect2: Rectangle(leftX: 3, topY: 2, width: 2, height: 3)),
@@ -53,4 +51,25 @@ class RectanglesTests: XCTestCase {
         XCTAssertEqual(Rectangle(rect1: Rectangle(), rect2: Rectangle()), nil)
     }
     
+    
+    func testEngine() {
+        var engine = Engine()
+        
+        engine.addRectangle(Rectangle(leftX: 1, topY: 1, width: 3, height: 2))
+        engine.addRectangle(Rectangle(leftX: 3, topY: 2, width: 1, height: 1))
+        engine.addRectangle(Rectangle(leftX: 3, topY: 1, width: 1, height: 1))
+        
+        XCTAssertEqual(engine.rectangleCount, 3)
+        XCTAssertEqual(engine.allIntersections.count, 2)
+        
+        XCTAssertEqual(engine.allIntersections[0], Rectangle(leftX: 3, topY: 1, width: 1, height: 1))
+        XCTAssertEqual(engine.allIntersections[1], Rectangle(leftX: 3, topY: 2, width: 1, height: 1))
+        
+        engine.resizeRectangle(pos: 2, to: Rectangle(leftX: 5, topY: 3, width: 1, height: 1))
+        
+        XCTAssertEqual(engine.rectangleCount, 3)
+        XCTAssertEqual(engine.allIntersections.count, 1)
+        
+        XCTAssertEqual(engine.allIntersections[0], Rectangle(leftX: 3, topY: 2, width: 1, height: 1))
+    }
 }
