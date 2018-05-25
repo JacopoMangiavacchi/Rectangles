@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class RectangleViewController: UIViewController {
     var engine = RectangleEngine()
     var forceFullRefresh = false
 
@@ -54,10 +54,11 @@ class ViewController: UIViewController {
         rectView.backgroundColor = color(engine.rectangleCount)
         rectView.alpha = 0
         self.rectsView.addSubview(rectView)
-        self.engine.addRectangle(rectView.rectangle)
+        
+        self.engine.addRectangle(rectangle)
         
         //animate first apparence of the new rectView with minimal dimension
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             rectView.alpha = 1
             rectView.rectangle = rectangle
         })
@@ -171,7 +172,7 @@ class ViewController: UIViewController {
 }
 
 // implement refresh view event from the Engine
-extension ViewController : EngineEvents {
+extension RectangleViewController : EngineEvents {
     func refreshRender() {
         removeAllIntersectionViews()
 
@@ -205,7 +206,7 @@ extension ViewController : EngineEvents {
 }
 
 //Gesture recognizers to move and resize rectViews
-extension ViewController: UIGestureRecognizerDelegate {
+extension RectangleViewController: UIGestureRecognizerDelegate {
     @objc func pinchHandler(_ gestureRecognizer: UIPinchGestureRecognizer) {
         if gestureRecognizer.state == .began || gestureRecognizer.state == .changed, let gestureView = gestureRecognizer.view {
             if gestureRecognizer.numberOfTouches == 2 {
@@ -249,7 +250,7 @@ extension ViewController: UIGestureRecognizerDelegate {
 
 
 //Touches Events to Draw new Rectangles
-extension ViewController {
+extension RectangleViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !addRectButton.isEnabled, let touch = touches.first {
             firstTouchPoint = touch.location(in: self.view)
