@@ -29,6 +29,7 @@ class ViewController: UIViewController {
     lazy var intersectionsView: UIView = {
         let view = UIView(frame: backGroundView.bounds)
         view.backgroundColor = .clear
+        view.alpha = 1
         view.isUserInteractionEnabled = false
         backGroundView.addSubview(view)
         return view
@@ -39,9 +40,9 @@ class ViewController: UIViewController {
     
     //random color func needed for supporting more than 2 rectViews
     func color(_ i: Int) -> UIColor {
-        return i < colors.count ? colors[i] : UIColor(red: CGFloat(arc4random() % 256) / 256,
-                                                      green: CGFloat(arc4random() % 256) / 256,
-                                                      blue: CGFloat(arc4random() % 256) / 256,
+        return i < colors.count ? colors[i] : UIColor(red: CGFloat(10 + (arc4random() % 246)) / 256,
+                                                      green: CGFloat(10 + (arc4random() % 246)) / 256,
+                                                      blue: CGFloat(10 + (arc4random() % 246)) / 256,
                                                       alpha: 1.0)
     }
     
@@ -133,11 +134,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func addRect(_ sender: Any) {
+        self.navigationItem.prompt = nil
         addRectButton.isEnabled = false
         disableAllGestureRecognizers()
     }
     
     func _reset() {
+        self.navigationItem.title = "Rectangles"
         engine.reset()
         removeAllRectViews()
         removeAllIntersectionViews()
@@ -179,10 +182,24 @@ extension ViewController : EngineEvents {
             for rectangle in engine.allRectangles {
                 addRectView(rectangle: rectangle)
             }
+
+            if engine.allRectangles.isEmpty {
+                self.navigationItem.title = "Rectangles"
+            }
+            else {
+                self.navigationItem.title = "\(engine.allRectangles.count) Rectangles"
+            }
         }
         
         for intersection in engine.allIntersections {
             addIntersectionView(rectangle: intersection)
+        }
+        
+        if engine.allIntersections.isEmpty {
+            navigationController?.navigationBar.barTintColor = UIColor.white
+        }
+        else {
+            navigationController?.navigationBar.barTintColor = UIColor.orange
         }
     }
 }
@@ -263,6 +280,7 @@ extension ViewController {
         if !addRectButton.isEnabled {
             enableAllGestureRecognizers()
             addRectButton.isEnabled = true
+            self.navigationItem.title = "\(engine.allRectangles.count) Rectangles"
         }
     }
 }
