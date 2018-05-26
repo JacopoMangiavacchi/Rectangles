@@ -51,7 +51,8 @@ class RectangleViewController: UIViewController {
         let rectView = UIRectangleView()
         rectView.rectangle = Rectangle(leftX: rectangle.leftX, topY: rectangle.topY, width: 0, height: 0)
         rectView.tag = engine.rectangleCount
-        rectView.backgroundColor = color(engine.rectangleCount)
+        rectView.contentView.backgroundColor = color(engine.rectangleCount)
+        rectView.tagLabel.text = String(engine.rectangleCount+1)
         rectView.alpha = 0
         self.rectsView.addSubview(rectView)
         

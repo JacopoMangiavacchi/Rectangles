@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7E311AD620B7748000967090 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E311AD520B7748000967090 /* Engine.swift */; };
 		7E8EEBF120B834120068B33F /* UIRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8EEBF020B834120068B33F /* UIRectangleView.swift */; };
+		7EA8ED3420BA26C000ABE082 /* UIRectangleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA8ED3320BA26C000ABE082 /* UIRectangleView.xib */; };
 		7EBC52D320B7534B00FB4360 /* RectangleIntentsDefinition.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EBC52D220B7534B00FB4360 /* RectangleIntentsDefinition.json */; };
 		7ECFEF2120B65EC500E24675 /* RectangleEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECFEF2020B65EC500E24675 /* RectangleEngine.swift */; };
 		7EDE7A0120B5571700E4C6D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDE7A0020B5571700E4C6D7 /* AppDelegate.swift */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		7E311AD520B7748000967090 /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		7E8EEBF020B834120068B33F /* UIRectangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIRectangleView.swift; sourceTree = "<group>"; };
+		7EA8ED3320BA26C000ABE082 /* UIRectangleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIRectangleView.xib; sourceTree = "<group>"; };
 		7EBC52D220B7534B00FB4360 /* RectangleIntentsDefinition.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RectangleIntentsDefinition.json; sourceTree = "<group>"; };
 		7ECFEF2020B65EC500E24675 /* RectangleEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleEngine.swift; sourceTree = "<group>"; };
 		7EDE79FD20B5571700E4C6D7 /* Rectangles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rectangles.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +133,7 @@
 			children = (
 				7EDE7A2520B5582A00E4C6D7 /* UIView-RectangleViewProtocol.swift */,
 				7E8EEBF020B834120068B33F /* UIRectangleView.swift */,
+				7EA8ED3320BA26C000ABE082 /* UIRectangleView.xib */,
 				7EDE7A0420B5571700E4C6D7 /* Main.storyboard */,
 				7EDE7A0920B5571800E4C6D7 /* LaunchScreen.storyboard */,
 			);
@@ -237,6 +240,7 @@
 			files = (
 				7EDE7A0B20B5571800E4C6D7 /* LaunchScreen.storyboard in Resources */,
 				7EDE7A0820B5571800E4C6D7 /* Assets.xcassets in Resources */,
+				7EA8ED3420BA26C000ABE082 /* UIRectangleView.xib in Resources */,
 				7EBC52D320B7534B00FB4360 /* RectangleIntentsDefinition.json in Resources */,
 				7EDE7A0620B5571700E4C6D7 /* Main.storyboard in Resources */,
 			);
