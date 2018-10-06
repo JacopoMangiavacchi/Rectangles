@@ -70,12 +70,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7E3CC8BD20B77657001C6197 /* IntentEngine */ = {
+		7E3CC8BD20B77657001C6197 /* IntentEngineProtocol */ = {
 			isa = PBXGroup;
 			children = (
 				7E311AD520B7748000967090 /* Engine.swift */,
 			);
-			path = IntentEngine;
+			path = IntentEngineProtocol;
 			sourceTree = "<group>";
 		};
 		7EBC52D120B7530700FB4360 /* Intent */ = {
@@ -107,9 +107,10 @@
 		7EDE79FF20B5571700E4C6D7 /* Rectangles */ = {
 			isa = PBXGroup;
 			children = (
-				7E3CC8BD20B77657001C6197 /* IntentEngine */,
+				7E3CC8BD20B77657001C6197 /* IntentEngineProtocol */,
 				7EBC52D120B7530700FB4360 /* Intent */,
 				7EDE7A2120B5573900E4C6D7 /* Model */,
+				EAFAD58E21693CAF00B547F3 /* Engine */,
 				7EDE7A2020B5573200E4C6D7 /* View */,
 				7EDE7A2220B5575100E4C6D7 /* Controller */,
 				7EDE7A0020B5571700E4C6D7 /* AppDelegate.swift */,
@@ -144,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				7EDE7A2320B557EF00E4C6D7 /* Rectangle.swift */,
-				7ECFEF2020B65EC500E24675 /* RectangleEngine.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -155,6 +155,14 @@
 				7EDE7A0220B5571700E4C6D7 /* RectangleViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		EAFAD58E21693CAF00B547F3 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				7ECFEF2020B65EC500E24675 /* RectangleEngine.swift */,
+			);
+			path = Engine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,9 +215,11 @@
 				TargetAttributes = {
 					7EDE79FC20B5571700E4C6D7 = {
 						CreatedOnToolsVersion = 9.3.1;
+						LastSwiftMigration = 1000;
 					};
 					7EDE7A1020B5571800E4C6D7 = {
 						CreatedOnToolsVersion = 9.3.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 7EDE79FC20B5571700E4C6D7;
 					};
 				};
@@ -435,7 +445,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jacopomangiavacchi.Rectangles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -453,7 +463,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jacopomangiavacchi.Rectangles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -473,7 +483,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jacopomangiavacchi.RectanglesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rectangles.app/Rectangles";
 			};
@@ -494,7 +504,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jacopomangiavacchi.RectanglesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rectangles.app/Rectangles";
 			};

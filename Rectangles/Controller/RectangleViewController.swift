@@ -22,7 +22,7 @@ class RectangleViewController: UIViewController {
         let view = UIView(frame: backGroundView.bounds)
         view.backgroundColor = .clear
         backGroundView.addSubview(view)
-        backGroundView.bringSubview(toFront: intersectionsView)
+        backGroundView.bringSubviewToFront(intersectionsView)
         return view
     }()
     
@@ -167,7 +167,7 @@ class RectangleViewController: UIViewController {
     }
     
     //Shake to reset!
-    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         _reset()       
     }
 }
